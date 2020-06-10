@@ -20,4 +20,17 @@ after_success:
   - docker push thantmyat/multi-client
   - docker push thantmyat/multi-nginx
   - docker push thantmyat/multi-server
-  - docker push thantmyat/multi-worker 
+  - docker push thantmyat/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: multi-docker
+  env: MultiDocker-env-1
+  bucket_name: elasticbeanstalk-us-east-2-593786189947
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
